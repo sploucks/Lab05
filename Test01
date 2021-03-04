@@ -1,0 +1,183 @@
+#include <stdio.h>
+#include <math.h>
+
+double inputCoordinate(char plane, int num)
+double sidelength(double x1, double x2, double y1, double y2)
+double perimeter_func(double side1, double side2, double side3)
+double incenter(double p1, double p2, double p3, double side1, double side2, double side3, double perim);
+double angle(double side1, double side2, double side3);
+double midpoint(double p1, double p2);
+double angleremainder(double a);
+double calculateS(double side1, double side2, double side3, double side4);
+double quadArea);
+void display(double AngleA, double AngleB, double AngleC, double AngleAMinutes, double AngleBMinutes, double AngleCMinutes, double AngleASeconds, double AngleBSeconds, double AngleCSeconds);
+
+int main()
+{
+  double xcoord1;
+  double xcoord2;
+  double xcoord3;
+  double ycoord1;
+  double ycoord2;
+  double ycoord3;
+  double inCenterx;
+  double inCentery;
+  double sideLength12; //side length from point A to point B
+  double sideLength23; //side length from point B to point C
+  double sideLength13; //side length from point C to point A
+  double perimeter; 
+  double angleA; //the angle at point A, in degrees
+  double angleB; //the angle at point B, in degrees
+  double angleC; //the angle at point C, in degrees
+  double angleAminutes;
+  double angleBminutes;
+  double angleCminutes;
+  double angleAseconds;
+  double angleBseconds;
+  double angleCseconds;
+  double midpoint12x;
+  double midpoint12y;
+  double midpoint23x;
+  double midpoint23y;
+  double midpoint13x;
+  duble midpoint13y;
+  double sideLengthMid12; //the distance from the center to the midpoint of 12
+  double sideLengthMid23; //the distance from the center to the midpoint of 23
+  double sideLengthMid13; //the distance from the center to the midpoint of 13
+  double areaA //the area of the inner quadrilateral A;
+  double areaB //the area of the inner quadrilateral B;
+  double areaC; //the area of the inner quadrilateralC
+  
+  xcoord1 = inputCoordinate("X", 1);
+  ycoord1 = inputCoordinate("Y", 1);
+  xcoord2 = inputCoordinate("X", 2);
+  ycoord2 = inputCoordinate("Y", 2);
+  xcoord3 = inputCoordinate("X", 3);
+  ycoord3 = inputCoordinate("Y", 3);
+  
+  sideLength12 = sideLength(xcoord1, xcoord2, ycoord1, ycoord2);
+  sideLength23 = sideLength(xcoord2, xcoord3, ycoord2, ycoord3);
+  sideLength13 = sideLength(xcoord3, xcoord1, ycoord3, ycoord1);
+  perimeter = perimeter_func(sideLength12, sideLength23, sideLength13);
+  
+  inCenterx = incenter(xcoord1, xcoord2, xcoord3, sideLength12, sideLength23, sideLength13, perimeter);
+  inCentery = incenter(ycoord1, ycoord2, ycoord3, sideLength12, sideLength23, sideLength13, perimeter_;
+  
+  //not sure if the following are in the correct order, gonna check once code runs
+  angleA = angle(sideLength13, sideLength12, sideLength23);
+  angleB = angle(sideLength23, sideLength12, sideLength13);
+  angleC = angle(sideLength23, sideLength13, sideLength12);
+  
+  angleAminutes = angleremainder(angleA);
+  angleAseconds = angleremainder(angleAminutes);
+  angleBminutes = angleremainder(angleB);
+  angleBseconds = angleremainder(angleBminutes);
+  angleCminutes = angleremainder(angleC);
+  angleCseconds = angleremainder(angleCminutes);
+  
+  midpoint12x = midpoint(xcoord1, xcoord2);
+  midpoint12y = midpoint(ycoord1, ycoord2);
+  midpoint23x = midpoint(xcoord2, xcoord3);
+  midpoint23y = midpoint(ycoord2, ycoord3);
+  midpoint13x = midpoint(xcoord1, xcoord3);
+  midpoint13y = midpoint(ycoord1, ycoord3);
+  
+  sideLengthMid12 = sideLength(midpoint12x, incenterx, midpoint12y, incentery);
+  sideLengthMid23 = sideLength(midpoint23x, incenterx, midpoint23y, incentery);
+  sideLengthMid13 = sideLength(midpoint13x, incenterx, midpoint13x, incentery);
+  
+  //the following calculates the area of the inner quadrilaterals
+  areaA = quadArea();
+  areaB = quadArea();
+  areaC = quadArea();
+  
+  return (0);
+}
+
+void display(double AngleA, double AngleB, double AngleC, double AngleAMinutes, double AngleBMinutes, double AngleCMinutes, double AngleASeconds, double AngleBSeconds, double AngleCSeconds)
+{
+  double PrintAngleA;
+  double PrintAngleB;
+  double PrintAngleC;
+  double PrintMinutesA;
+  double PrintMinutesB;
+  double PrintMinutesC;
+  
+  PrintAngleA = floor(AngleA);
+  PrintAngleB = floor(AngleB);
+  PrintAngleC = floor(AngleC);
+  PrintMinutesA = floor(AngleAMinutes);
+  PrintMinutesB = floor(AngleBMinutes);
+  PrintMinutesC = floor(AngleCMinutes);
+  
+  printf("Internal triangle angle %.0lf° %.0lf' %.2lf\", %.0lf° %.0lf' %.2lf\", %.0lf° %.0lf' %.2lf\"", AngleA, PrintMinutesA, AngleASeconds, AngleB, PrintMinutesB, AngleBSeconds, AngleC, PrintMinutesC, AngleCSeconds);
+}
+
+double angleremainder(double a)
+{
+  double remainder;
+  double minutes;
+  
+  remainder = a - floor(a);
+  minutes = remainder * 60;
+  
+  return(minutes);
+}
+
+double midpoint(p1, p2)
+{
+  double midpoint;
+  midpoint = (p1 + p2) / 2;
+  return midpoint
+}
+
+double inputCoordinate(char plane, int num)
+{
+  double coord;
+  printf("Enter %c coordinate #%i -> ", plane, num);
+  scanf("%lf", coord);
+}
+
+double sidelength(double x1, double x2, double y1, double y2)
+{
+  double dist;
+  double xdiff;
+  double ydiff;
+
+  xdiff = abs(x1 - x2);
+  ydiff = abs(y1 - y2);
+  dist = sqrt(pow(xdiff, 2) + pow(ydiff, 2));
+
+  return (dist);
+}
+
+double perimeter_func(double side1, double side2, double side3)
+{
+    double perim;
+    perim = side1 + side2 + side3;
+    return(perim);
+}
+
+double incenter(double p1, double p2, double p3, side1, side2, side3, perimeter)
+{
+  double coord;
+  coord = num1 * dis1 + num2 * dis2 + num3 * dis3;
+  coord /= perimeter;
+  return (coord);
+}
+
+double angle(double side1, double side2, double side3)
+{
+	numerator = pow(side1, 2) + pow(side2, 2) - pow(side3, 2)
+	radToDeg = (M_PI / 180) * (numerator / denominator); //converts radians to degrees
+  resultAngle = acos(radToDeg);
+  return(resultAngle);
+}
+
+double calculateS(double side1, double side2, double side3, double side4);
+{
+  double s;
+  s += side1 + side2 + side3 + side4;
+  s /= 2;
+  return s;
+}
